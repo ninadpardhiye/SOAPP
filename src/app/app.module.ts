@@ -9,7 +9,8 @@ import { HomePage } from '../pages/home/home';
 
 // Import the AF2 Module
 import { AngularFireModule } from 'angularfire2';
- 
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+
 // AF2 Settings
 export const firebaseConfig = {
   apiKey: "AIzaSyDfReiSGQbyb7ifi5G1Lq-rLI5yV8L2-Bk",
@@ -38,6 +39,7 @@ export const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
+    AngularFireAuth,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
