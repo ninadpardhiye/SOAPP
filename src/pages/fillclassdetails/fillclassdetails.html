@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      {{currentVolunteerKids.class_number}}th Std. : {{currentVolunteer.subject}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-label>{{currentVolunteerKids.class_number}} {{currentVolunteer.subject}}</ion-label>
+  <ion-input type="input" [(ngModel)]="classForm.classOutput" name="classForm.classOutput"></ion-input>
+  <ion-list *ngFor="let kid of currentVolunteerKids.kid_names; let i = index;" no-lines>
+    <ion-label>{{kid}}</ion-label>
+    <ion-input type="input" [(ngModel)]="classForm.kid" name="classForm.kid"></ion-input>
+  </ion-list>
+</ion-content>

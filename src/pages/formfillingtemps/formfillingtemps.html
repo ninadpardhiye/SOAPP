@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Form Filling Temps
+    </ion-title>
+    <!--<ion-buttons end>
+      <button ion-button icon-only (click)="addSong()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>-->
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div padding id="cloud-layer">
+
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+
+          <ion-item>
+            <ion-label>Class Number</ion-label>
+            <ion-input type="input" [(ngModel)]="classForm.class_number" name="class_number"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Volunteer1 Subject</ion-label>
+            <ion-input type="input" [(ngModel)]="classForm.class_teachers[0].subject" name="class_teachers[0].subject"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Volunteer1 Name</ion-label>
+            <ion-input type="input" [(ngModel)]="classForm.class_teachers[0].name" name="class_teachers[0].name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Volunteer1 Email</ion-label>
+            <ion-input type="input" [(ngModel)]="classForm.class_teachers[0].email" name="class_teachers[0].email"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Volunteer2 Subject</ion-label>
+            <ion-input type="input" [(ngModel)]="classForm.class_teachers[1].subject" name="class_teachers[3].subject"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Volunteer2 Name</ion-label>
+            <ion-input type="input" [(ngModel)]="classForm.class_teachers[1].name" name="class_teachers[3].name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Volunteer2 Email</ion-label>
+            <ion-input type="input" [(ngModel)]="classForm.class_teachers[1].email" name="class_teachers[3].email"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Volunteer3 Subject</ion-label>
+            <ion-input type="input" [(ngModel)]="classForm.class_teachers[2].subject" name="class_teachers[3].subject"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Volunteer3 Name</ion-label>
+            <ion-input type="input" [(ngModel)]="classForm.class_teachers[2].name" name="class_teachers[3].name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Volunteer3 Email</ion-label>
+            <ion-input type="input" [(ngModel)]="classForm.class_teachers[2].email" name="class_teachers[3].email"></ion-input>
+          </ion-item>
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button class="login-button" (click)="addKids()">Login</button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+
+</ion-content>

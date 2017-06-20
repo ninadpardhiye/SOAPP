@@ -1,6 +1,8 @@
 import { Component, NgZone } from '@angular/core';
 import { NavController, AlertController, ToastController } from 'ionic-angular';
 
+import { FillClassDetails } from '../fillclassdetails/fillclassdetails';
+
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
@@ -26,8 +28,12 @@ export class HomePage {
 
   login() {
     this.afAuth.auth.signInWithEmailAndPassword(this.userCreds.email, this.userCreds.password).then( () => {
-      this.songs = this.db.list('/songs');
-      console.log(this.songs);
+      // this.afAuth.auth.signInWithEmailAndPassword('ninadpardhiye7@gmail.com', 'NinadPardhiye').then( () => {
+      // this.songs = this.db.list('/songs');
+      // console.log(this.songs);
+      // this.navCtrl.pop(this);
+      console.log('Logged in');
+      this.navCtrl.setRoot(FillClassDetails);
     }).catch(function(error){
       let toast = this.toastCtrl.create({
         message: error.message,
