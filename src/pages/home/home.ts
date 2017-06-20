@@ -27,8 +27,8 @@ export class HomePage {
   }
 
   login() {
-    this.afAuth.auth.signInWithEmailAndPassword(this.userCreds.email, this.userCreds.password).then( () => {
-      // this.afAuth.auth.signInWithEmailAndPassword('ninadpardhiye7@gmail.com', 'NinadPardhiye').then( () => {
+    // this.afAuth.auth.signInWithEmailAndPassword(this.userCreds.email, this.userCreds.password).then( () => {
+      this.afAuth.auth.signInWithEmailAndPassword('ninadpardhiye7@gmail.com', 'NinadPardhiye').then( () => {
       // this.songs = this.db.list('/songs');
       // console.log(this.songs);
       // this.navCtrl.pop(this);

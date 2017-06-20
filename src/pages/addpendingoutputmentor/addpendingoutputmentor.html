@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Add Pending Class Output
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Class Number</ion-label>
+    <ion-input type="number" [(ngModel)]="classForm.class_number" name="classForm.class_number"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Class Subject</ion-label>
+    <ion-select [(ngModel)]="classForm.subject" name="classForm.subject">
+      <ion-option value="English">English</ion-option>
+      <ion-option value="Maths">Maths</ion-option>
+      <ion-option value="Science">Science</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Class Date</ion-label>
+    <ion-input type="date" [(ngModel)]="classForm.date" name="classForm.date"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Class Teacher</ion-label>
+    <ion-select [(ngModel)]="classForm.teacher" name="classForm.teacher">
+      <div *ngFor="let teacher of volunteersToShow">
+      <ion-option value={{teacher.email}}>{{teacher.name}}</ion-option>
+      </div>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <button ion-button class="submit-button" (click)="addPendingOutput()">Login</button>
+  </ion-item>
+</ion-content>

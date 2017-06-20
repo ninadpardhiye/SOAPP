@@ -18,22 +18,22 @@ export class FormFillingTemps {
   volunteers: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, private toastCtrl: ToastController, private db: AngularFireDatabase, public afAuth: AngularFireAuth, public alertCtrl: AlertController,) {
-    this.classForm = {
-      class_number: '',
-      class_teachers: [{
-        email: '',
-        name: '',
-        subject: ''
-      },{
-        email: '',
-        name: '',
-        subject: ''
-      },{
-        email: '',
-        name: '',
-        subject: ''
-      }]
-      };
+    // this.classForm = {
+    //   class_number: '',
+    //   class_teachers: [{
+    //     email: '',
+    //     name: '',
+    //     subject: ''
+    //   },{
+    //     email: '',
+    //     name: '',
+    //     subject: ''
+    //   },{
+    //     email: '',
+    //     name: '',
+    //     subject: ''
+    //   }]
+    //   };
     this.volunteers = this.db.list('/volunteers');
   }
 

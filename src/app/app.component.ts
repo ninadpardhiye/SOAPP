@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { FormFillingTemps } from '../pages/formfillingtemps/formfillingtemps';
 import { FillClassDetails } from '../pages/fillclassdetails/fillclassdetails';
+import { AddPendingOutputMentor } from '../pages/addpendingoutputmentor/addpendingoutputmentor';
 
 @Component({
   templateUrl: 'app.html'
@@ -20,6 +21,7 @@ export class MyApp {
     this.initializeApp();
 
     this.pages = [
+      {title: 'Add Pending Output', component: AddPendingOutputMentor},
       {title: 'Fill Class Details', component: FillClassDetails},
       {title: 'Form Filling Temps', component: FormFillingTemps}
     ]
