@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      {{classOutput.class_number}}th: {{classOutput.output.subject}} - {{classOutput.output.date}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      Class
+    </ion-card-header>
+    <ion-card-content>
+      {{classOutput.output.class_output}}
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngFor="let kidReview of classOutput.output.kids">
+
+    <ion-card>
+      <ion-card-header>
+        {{kidReview.kid_name}}
+      </ion-card-header>
+      <ion-card-content>
+        {{kidReview.kid_review}}
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+</ion-content>

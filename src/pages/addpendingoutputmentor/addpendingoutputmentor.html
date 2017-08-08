@@ -11,30 +11,34 @@
 
 <ion-content>
   <ion-item>
-    <ion-label>Class Number</ion-label>
+    <ion-label floating>Class Number</ion-label>
     <ion-input type="number" [(ngModel)]="classForm.class_number" name="classForm.class_number"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>Class Subject</ion-label>
+    <ion-label floating>Class Subject</ion-label>
     <ion-select [(ngModel)]="classForm.subject" name="classForm.subject">
       <ion-option value="English">English</ion-option>
-      <ion-option value="Maths">Maths</ion-option>
+      <ion-option value="Math">Math</ion-option>
       <ion-option value="Science">Science</ion-option>
     </ion-select>
   </ion-item>
   <ion-item>
-    <ion-label>Class Date</ion-label>
+    <ion-label floating>Class Date</ion-label>
     <ion-input type="date" [(ngModel)]="classForm.date" name="classForm.date"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>Class Teacher</ion-label>
+    <ion-label floating>Class Teacher</ion-label>
     <ion-select [(ngModel)]="classForm.teacher" name="classForm.teacher">
       <div *ngFor="let teacher of volunteersToShow">
-      <ion-option value={{teacher.email}}>{{teacher.name}}</ion-option>
+        <ion-option value={{teacher.email}}>{{teacher.name}}</ion-option>
       </div>
     </ion-select>
   </ion-item>
   <ion-item>
-    <button ion-button class="submit-button" (click)="addPendingOutput()">Login</button>
+    <ion-label>Is Subbed?</ion-label>
+    <ion-checkbox [(ngModel)]="classForm.subbed" name="classForm.subbed"></ion-checkbox>
+  </ion-item>
+  <ion-item>
+    <button ion-button class="submit-button" (click)="addPendingOutput()">Add Pending Output</button>
   </ion-item>
 </ion-content>

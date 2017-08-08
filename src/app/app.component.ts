@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -7,9 +7,15 @@ import { HomePage } from '../pages/home/home';
 import { FormFillingTemps } from '../pages/formfillingtemps/formfillingtemps';
 import { FillClassDetails } from '../pages/fillclassdetails/fillclassdetails';
 import { AddPendingOutputMentor } from '../pages/addpendingoutputmentor/addpendingoutputmentor';
+import { VolunteerFillingTemps } from '../pages/volunteerfillingtemp/volunteerfillingtemps';
+import { KidFillingTemps } from '../pages/kidfillingtemp/kidfillingtemps';
+import { ViewClassOutputsOverview } from '../pages/viewclassoutputs/viewclassoutputsoverview';
+
+import { AuthProvider } from '../services/auth';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [AuthProvider]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -17,14 +23,41 @@ export class MyApp {
   rootPage:any = HomePage;
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public events: Events, private authProvider: AuthProvider) {
     this.initializeApp();
-
     this.pages = [
-      {title: 'Add Pending Output', component: AddPendingOutputMentor},
       {title: 'Fill Class Details', component: FillClassDetails},
-      {title: 'Form Filling Temps', component: FormFillingTemps}
-    ]
+      {title: 'View Class Outputs', component: ViewClassOutputsOverview}
+    ];
+    events.subscribe('user:loggedIn', () => {
+      this.updateMenuItems();
+    });
+  }
+
+  updateMenuItems(){
+    this.authProvider.checkIfUserIsAdmin().then( isAdmin => {
+      if(isAdmin) {
+        this.pages.push(
+          {title: 'Add Pending Output', component: AddPendingOutputMentor}
+        );
+        this.pages.push(
+          {title: 'Add Volunteer To Class', component: VolunteerFillingTemps}
+        );
+        this.pages.push(
+          {title: 'Add Kid To Class', component: KidFillingTemps}
+        );
+        this.pages.push(
+          {title: 'View Class Outputs', component: ViewClassOutputsOverview}
+        );
+      }
+      else {
+        this.authProvider.checkIfUserIsMentor().then(isMentor => {
+          this.pages.push(
+            {title: 'Add Pending Output', component: AddPendingOutputMentor}
+          );
+        });
+      }
+    })
   }
 
   initializeApp(){
@@ -43,4 +76,3 @@ export class MyApp {
   }
 
 }
-

@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Form Filling Temps
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div padding id="cloud-layer">
+
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+
+          <ion-item>
+            <ion-label floating>Class Number</ion-label>
+            <ion-input type="input" [(ngModel)]="classForm.class_number" name="class_number"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>Name</ion-label>
+            <ion-input type="input" [(ngModel)]="classForm.class_teachers[0].name" name="class_teachers[0].name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Subject</ion-label>
+            <ion-select [selectOptions]="selectOptions" [(ngModel)]="classForm.class_teachers[0].subject" name="class_teachers[0].subject">
+              <!--<span *ngFor="let subject of subjects">-->
+                <ion-option *ngFor="let subject of subjects">{{subject}}</ion-option>
+              <!--</span>-->
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="input" [(ngModel)]="classForm.class_teachers[0].email" name="class_teachers[0].email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Is Mentor?</ion-label>
+            <ion-checkbox [(ngModel)]="classForm.class_teachers[0].isMentor" name="class_teachers[0].isMentor"></ion-checkbox>
+          </ion-item>
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button class="login-button" (click)="addVolunteer()">Add Volunteer</button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+
+</ion-content>

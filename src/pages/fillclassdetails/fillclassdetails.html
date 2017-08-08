@@ -4,16 +4,36 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      {{currentVolunteerKids.class_number}}th Std. : {{currentVolunteer.subject}}
+      <div *ngIf="isPendingOutput; else elseBlockTitle">
+        {{pendingOutput.class_number}}th Std. : {{pendingOutput.subject}}
+      </div>
+      <ng-template #elseBlockTitle>
+        No pending class
+      </ng-template>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-label>{{currentVolunteerKids.class_number}} {{currentVolunteer.subject}}</ion-label>
-  <ion-input type="input" [(ngModel)]="classForm.classOutput" name="classForm.classOutput"></ion-input>
-  <ion-list *ngFor="let kid of currentVolunteerKids.kid_names; let i = index;" no-lines>
-    <ion-label>{{kid}}</ion-label>
-    <ion-input type="input" [(ngModel)]="classForm.kid" name="classForm.kid"></ion-input>
+  <div *ngIf="isPendingOutput; else elseBlock">
+  <ion-item>
+    <ion-label floating>Class Output</ion-label>
+    <ion-textarea elastic [(ngModel)]="classForm.class_output" name="classForm.class_output"></ion-textarea>
+  </ion-item>
+  <ion-list *ngFor="let kid of currentVolunteerKids.kid_names; let i = index; trackBy: customTrackBy" no-lines>
+    <ion-item>
+      <ion-label floating>{{kid}}</ion-label>
+      <ion-input type="text" hidden [(ngModel)]="classForm.kids_output[i].kid_name" name="classForm.kids_output[i].kid_name" value="{{kid}}">{{kid}}</ion-input>
+      <ion-textarea elastic [(ngModel)]="classForm.kids_output[i].kid_output" name="classForm.kids_output[i].kid_output"></ion-textarea>
+    </ion-item>
   </ion-list>
+  <ion-row>
+    <ion-col>
+      <button ion-button class="login-button" (click)="addClassOutput()">Submit Class Output</button>
+    </ion-col>
+  </ion-row>
+  </div>
+  <ng-template #elseBlock>
+    <ion-label>You don't have any pending class outputs</ion-label>
+  </ng-template>
 </ion-content>

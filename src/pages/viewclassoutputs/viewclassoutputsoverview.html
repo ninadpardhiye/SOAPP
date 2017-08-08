@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Class Outputs
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngFor="let classOutput of foundClassOutputs">
+
+    <ion-card>
+
+      <ion-item>
+        <!--<ion-avatar item-start>
+          <img src="assets/login.jpg">
+        </ion-avatar>-->
+        <h2>{{classOutput.class_number}}th: {{classOutput.output.subject}}</h2>
+        <p>{{classOutput.output.date}}</p>
+      </ion-item>
+
+      <!--<img src="assets/login.jpg">-->
+
+      <ion-card-content>
+        <p>{{classOutput.output.class_output}}</p>
+      </ion-card-content>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <!--<ion-icon name="thumbs-down"></ion-icon>-->
+            <div *ngIf="classOutput.subbed; else elseBlock">
+              <div>Class Subbed</div>
+            </div>
+            <ng-template #elseBlock>
+              <div>Class By ASV</div>
+            </ng-template>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="person"></ion-icon>
+            <div>{{ classOutput.output.teacher.name | slice:0:12 }}{{classOutput.output.teacher.name.length > 12 ? '...' : ''}}</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small (click)="showDetailOutput(classOutput)">
+            <ion-icon name="text"></ion-icon>
+            <div>{{classOutput.output.kids.length}} kids</div>
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
+
+  </div>
+
+</ion-content>

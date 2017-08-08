@@ -1,18 +1,19 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, AlertController, ToastController } from 'ionic-angular';
+import { NavController, AlertController, ToastController, LoadingController } from 'ionic-angular';
 
 import { ClassKid } from '../classes/class_kids';
 import { Volunteer } from '../classes/volunteer';
 import { PendingOutputs } from '../classes/pending_outputs';
 
-import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
+
+import { DataProvider } from '../../services/data';
 
 @Component({
   selector: 'page-addpendingoutputmentor',
   templateUrl: 'addpendingoutputmentor.html',
-  providers: [AngularFireDatabase, AngularFireAuth]
+  providers: [DataProvider]
 })
 export class AddPendingOutputMentor {
 
@@ -21,16 +22,15 @@ export class AddPendingOutputMentor {
   volunteersToShow: Array<Volunteer>;
   classForm: PendingOutputs;
 
-  constructor(public navCtrl: NavController, private toastCtrl: ToastController, private db: AngularFireDatabase, public afAuth: AngularFireAuth, public alertCtrl: AlertController,) {
-    this.classForm = {
-      class_number: '',
-      subject: '',
-      date: new Date,
-      teacher: new Volunteer
-    }
-    this.pendingOutputs = this.db.list('/pendingoutputs');
-    this.volunteersToShow = new Array<Volunteer>()
-     this.volunteers = this.db.list('/volunteers');
+  constructor(public navCtrl: NavController, public dataProvider: DataProvider, public loadingCtrl: LoadingController) {
+    this.resetClassForm();
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait while we get the awesome data...'
+    });
+    loading.present();
+    this.pendingOutputs = this.dataProvider.list('/pendingoutputs');
+    this.volunteersToShow = new Array<Volunteer>();
+     this.volunteers = this.dataProvider.list('/volunteers');
      this.volunteers.forEach(volunteerData => {
        volunteerData.forEach(volunteer => {
          volunteer.class_teachers.forEach(teacher => {
@@ -38,12 +38,46 @@ export class AddPendingOutputMentor {
          });
        });
      });
+     loading.dismiss();
      console.log(this.volunteersToShow);
+  }
+
+  resetClassForm(){
+    this.classForm = {
+      $exists: () => true,
+      $key: '',
+      class_number: '',
+      subject: '',
+      date: new Date,
+      teacher: new Volunteer(),
+      subbed: false
+    }
   }
 
   addPendingOutput(){
     console.log('Adding pending output');
-    this.pendingOutputs.push(this.classForm);
-  }  
+    this.volunteers.forEach(volunteerData => {
+       volunteerData.forEach(volunteer => {
+         volunteer.class_teachers.forEach(teacher => {
+           if(this.classForm.teacher == teacher.email){
+             this.classForm.teacher = teacher;
+           }
+         });
+       });
+     });
+     let class_number = this.classForm.class_number;
+     let subject = this.classForm.subject;
+     let date = this.classForm.date;
+     let teacher = this.classForm.teacher;
+     let subbed = this.classForm.subbed;
+    this.pendingOutputs.push({
+      class_number,
+      date,
+      subject,
+      teacher,
+      subbed
+      });
+      this.resetClassForm();
+  }
 
 }

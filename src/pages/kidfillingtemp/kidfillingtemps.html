@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Form Filling Temps
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div padding id="cloud-layer">
+
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+
+          <ion-item>
+            <ion-label floating>Class Number</ion-label>
+            <ion-input type="input" [(ngModel)]="classForm.class_number" name="class_number"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>Name</ion-label>
+            <ion-input type="input" [(ngModel)]="classForm.kid_names[0]" name="kid_names[0]"></ion-input>
+          </ion-item>
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button class="login-button" (click)="addKids()">Login</button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+
+</ion-content>

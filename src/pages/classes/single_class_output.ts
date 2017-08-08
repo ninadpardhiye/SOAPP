@@ -5,8 +5,10 @@ export class SingleClassOutput{
     teacher: Volunteer;
     class_output: string;
     kids: Array<KidReview>;
+    subject: string;
 
     constructor(){
+        this.subject = '';
         this.date = new Date;
         this.teacher = new Volunteer();
         this.class_output = '';
