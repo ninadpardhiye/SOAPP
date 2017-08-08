@@ -27,7 +27,7 @@ export class HomePage {
     events.subscribe('user:wantsToLogIn', () => {
       setTimeout (() => {
         this.login();
-      }, 5000);
+      }, 0);
     });
   }
 
@@ -43,8 +43,8 @@ export class HomePage {
     });
     loading.present();
     console.log('inside login method');
-    // this.authProvider.loginWithEmail(this.userCreds.email, this.userCreds.password).then( () => {
-      this.authProvider.loginWithEmail('ninad@ninad.com', 'password').then( () => {
+    this.authProvider.loginWithEmail(this.userCreds.email, this.userCreds.password).then( () => {
+      // this.authProvider.loginWithEmail('ninad@ninad.com', 'password').then( () => {
       // this.authProvider.loginWithEmail('ninadpardhiye7@gmail.com', 'NinadPardhiye').then( () => {
         console.log('have logged in');
         this.events.publish('user:loggedIn');
